@@ -1,0 +1,9 @@
+[MASTER]
+ignore = venv,migrations
+
+[MESSAGES CONTROL]
+disable =
+    C0114,  # Missing module docstring
+    C0116,  # Missing function docstring
+    E0401,  # Import errors (if intentional)
+    R0903,  # Too few public methods (common in Flask)
