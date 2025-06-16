@@ -33,6 +33,8 @@ def create_app(config_name=None):
     # Tell Flask to use the instance folder for config & DB
     app = Flask(__name__, instance_relative_config=True)
 
+    
+
     # Determine configuration
     cfg_name = config_name or os.getenv('FLASK_ENV', 'default')
     cfg_class = config.get(cfg_name, config['default'])
@@ -114,7 +116,11 @@ def setup_logging(app):
     app.logger.info('Application startup')
 
 
+
 # Entry point
 if __name__ == '__main__':
     app = create_app()
+    @app.route('/')
+    def home():
+        return "Hello from Production Server!"
     app.run(host='0.0.0.0', port=5000, debug=True)

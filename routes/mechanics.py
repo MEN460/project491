@@ -6,7 +6,7 @@ from models import User
 from math import radians, cos, sin, sqrt, atan2
 from utils.auth import get_current_user, requires_role
 
-mechanics_bp = Blueprint('mechanics', __name__, url_prefix='/api')
+mechanics_bp = Blueprint('mechanics', __name__, url_prefix='/api/mechanics')
 
 
 def haversine(lat1, lon1, lat2, lon2):

@@ -1,3 +1,4 @@
+# auth.py
 """
 Authentication routes for user registration, login, and password management.
 Includes JWT token generation, password reset flows, and user profile endpoints.
@@ -98,8 +99,22 @@ def register():
         db.session.add(new_user)
         db.session.commit()
 
+        # Generate tokens just like login
+        access_token = create_access_token(
+            identity=str(new_user.id),
+            additional_claims={
+                'user_type': new_user.user_type,
+                'is_admin': getattr(new_user, 'is_admin', False)
+            }
+        )
+        refresh_token = create_refresh_token(identity=str(new_user.id))
+
         logger.info(f"New user registered: {new_user.id}")
-        return jsonify({'message': 'Registration successful', 'user_id': new_user.id}), 201
+        return jsonify({
+            'access_token': access_token,
+            'refresh_token': refresh_token,
+            'user': new_user.to_dict()
+        }), 201
 
     except Exception as e:
         db.session.rollback()

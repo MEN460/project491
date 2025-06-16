@@ -1,13 +1,12 @@
 # routes/service.py
-
+from datetime import datetime
+import logging
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required
 from models import db, ServiceRequest, User
-from datetime import datetime
 from utils.auth import get_current_user, requires_role
-import logging
 
-service_bp = Blueprint('service', __name__, url_prefix='/api')
+service_bp = Blueprint('service', __name__, url_prefix='/api/service')
 logger = logging.getLogger(__name__)
 
 

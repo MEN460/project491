@@ -51,3 +51,8 @@ def update_location():
         'latitude': latitude,
         'longitude': longitude
     }), 200
+
+
+@location_bp.route('/health', methods=['GET'])
+def health_check():
+    return jsonify({"status": "ok", "service": "location"}), 200
